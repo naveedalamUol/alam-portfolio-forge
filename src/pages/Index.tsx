@@ -244,7 +244,7 @@ const Index = () => {
                   </div>
                   <div className="p-6 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
                     <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Location</h4>
-                    <p className="text-gray-600 dark:text-gray-300">I8, ISLAMABAD</p>
+                    <p className="text-gray-600 dark:text-gray-300">I-8, ISLAMABAD</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">Pakistan</p>
                   </div>
                 </div>
