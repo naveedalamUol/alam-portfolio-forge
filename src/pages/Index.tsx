@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { Moon, Sun, Menu, X, ArrowUp, Mail, MapPin, ExternalLink, Download, Star, Code, Palette, Settings, Zap } from 'lucide-react';
+import { Moon, Sun, Menu, X, ArrowUp, Mail, MapPin, ExternalLink, Download, Star, Code, Palette, Settings, Zap, Award, Users, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -129,6 +129,12 @@ const Index = () => {
     }
   ];
 
+  const stats = [
+    { number: '50+', label: 'Projects Completed', icon: <Award className="w-8 h-8" /> },
+    { number: '25+', label: 'Happy Clients', icon: <Users className="w-8 h-8" /> },
+    { number: '3+', label: 'Years Experience', icon: <Clock className="w-8 h-8" /> },
+  ];
+
   if (!mounted) return null;
 
   if (isLoading) {
@@ -140,23 +146,23 @@ const Index = () => {
       <FloatingElements />
       
       {/* Enhanced Navigation */}
-      <nav className="fixed top-0 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl z-50 border-b border-gray-200/50 dark:border-gray-700/50 shadow-lg">
+      <nav className="fixed top-0 w-full bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg z-50 border-b border-gray-200/20 dark:border-gray-700/20 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
+          <div className="flex justify-between items-center h-16">
             <button
               onClick={() => scrollToSection('hero')}
-              className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
+              className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
             >
               Naveed Alam
             </button>
             
             {/* Desktop Navigation */}
-            <div className="hidden md:flex space-x-2">
+            <div className="hidden md:flex space-x-1">
               {navItems.map((item) => (
                 <button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
-                  className="relative px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 font-medium rounded-lg hover:bg-gray-100/50 dark:hover:bg-gray-800/50 group"
+                  className="relative px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 rounded-lg hover:bg-gray-100/50 dark:hover:bg-gray-800/50 group"
                 >
                   {item.label}
                   <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
@@ -165,40 +171,39 @@ const Index = () => {
             </div>
 
             {/* Controls */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
               <button
                 onClick={toggleDarkMode}
-                className="p-3 rounded-xl bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 text-gray-700 dark:text-gray-300 hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-900 dark:hover:to-purple-900 transition-all duration-300 transform hover:scale-110 hover:rotate-12"
+                className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
                 aria-label="Toggle dark mode"
               >
-                {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+                {darkMode ? <Sun size={18} /> : <Moon size={18} />}
               </button>
               
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-3 rounded-xl bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 text-gray-700 dark:text-gray-300 hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-900 dark:hover:to-purple-900 transition-all duration-300 transform hover:scale-110"
+                className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
                 aria-label="Toggle mobile menu"
               >
-                {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
               </button>
             </div>
           </div>
         </div>
 
-        {/* Enhanced Mobile Navigation */}
-        <div className={`md:hidden transition-all duration-500 ease-in-out ${
+        {/* Mobile Navigation */}
+        <div className={`md:hidden transition-all duration-300 ease-in-out ${
           mobileMenuOpen 
             ? 'max-h-96 opacity-100' 
             : 'max-h-0 opacity-0 overflow-hidden'
         }`}>
-          <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-t border-gray-200/50 dark:border-gray-700/50 shadow-xl">
-            <div className="px-4 py-6 space-y-2">
-              {navItems.map((item, index) => (
+          <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border-t border-gray-200/20 dark:border-gray-700/20">
+            <div className="px-4 py-4 space-y-1">
+              {navItems.map((item) => (
                 <button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
-                  className="block w-full text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/30 dark:hover:to-purple-900/30 rounded-xl transition-all duration-300 font-medium transform hover:translate-x-2"
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  className="block w-full text-left px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all duration-300"
                 >
                   {item.label}
                 </button>
@@ -210,97 +215,108 @@ const Index = () => {
 
       {/* Enhanced Hero Section */}
       <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-purple-600/5"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900"></div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 pt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 pt-16">
           <AnimatedSection animation="fade-up">
-            <div className="relative mb-8">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-full blur-2xl transform scale-150 animate-pulse"></div>
+            <div className="relative mb-12">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face"
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face"
                 alt="Naveed Alam"
-                className="relative w-48 h-48 md:w-56 md:h-56 rounded-full mx-auto shadow-2xl ring-4 ring-blue-500/30 dark:ring-blue-400/40 hover:scale-105 transition-all duration-500 hover:shadow-blue-500/25"
+                className="w-32 h-32 rounded-full mx-auto shadow-xl ring-4 ring-white dark:ring-gray-800 object-cover"
               />
             </div>
           </AnimatedSection>
           
           <AnimatedSection animation="fade-up" delay={200}>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-pulse">
-                Naveed Alam
-              </span>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
+              I'm <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Naveed Alam</span>
             </h1>
           </AnimatedSection>
           
           <AnimatedSection animation="fade-up" delay={400}>
-            <p className="text-xl md:text-2xl lg:text-3xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6 font-semibold">
-              Software Engineer | Graphic Designer | IT Specialist
+            <p className="text-xl md:text-2xl text-blue-600 dark:text-blue-400 mb-4 font-medium">
+              Software Engineer & Designer
             </p>
           </AnimatedSection>
           
           <AnimatedSection animation="fade-up" delay={600}>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Building solutions that merge design, technology, and support seamlessly to create exceptional digital experiences.
+            <p className="text-lg text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+              Crafting digital experiences through innovative software solutions, 
+              intuitive design, and comprehensive IT support services.
             </p>
           </AnimatedSection>
           
           <AnimatedSection animation="fade-up" delay={800}>
-            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                <Download className="mr-2" size={20} />
-                View Resume
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 shadow-lg hover:shadow-xl transition-all duration-300">
+                <Download className="mr-2" size={18} />
+                Download CV
               </Button>
-              <Button size="lg" onClick={() => scrollToSection('contact')} className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                <Zap className="mr-2" size={20} />
-                Hire Me
+              <Button size="lg" onClick={() => scrollToSection('contact')} className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 shadow-lg hover:shadow-xl transition-all duration-300">
+                <Mail className="mr-2" size={18} />
+                Contact Me
               </Button>
-              <Button size="lg" variant="outline" asChild className="border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-400 px-8 py-4 rounded-xl backdrop-blur-sm hover:bg-blue-50 dark:hover:bg-blue-900/20 transform hover:scale-105 transition-all duration-300">
+              <Button size="lg" variant="outline" asChild className="border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-400 px-8 py-3 transition-all duration-300">
                 <a href="https://fiverr.com/g_designer6" target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="mr-2" size={20} />
+                  <ExternalLink className="mr-2" size={18} />
                   Fiverr Profile
                 </a>
               </Button>
+            </div>
+          </AnimatedSection>
+
+          {/* Stats Section */}
+          <AnimatedSection animation="fade-up" delay={1000}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
+              {stats.map((stat, index) => (
+                <div key={stat.label} className="text-center">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full text-white mb-4">
+                    {stat.icon}
+                  </div>
+                  <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{stat.number}</div>
+                  <div className="text-gray-600 dark:text-gray-400">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </AnimatedSection>
         </div>
       </section>
 
       {/* Enhanced About Section */}
-      <section id="about" className="py-20 lg:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-transparent to-purple-50/30 dark:from-blue-900/10 dark:via-transparent dark:to-purple-900/10"></div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <section id="about" className="py-20 bg-gray-50 dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection animation="fade-up">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  About Me
-                </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                About Me
               </h2>
-              <div className="w-32 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
+              <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
             </div>
           </AnimatedSection>
           
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <AnimatedSection animation="fade-right">
               <div className="space-y-6">
-                <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
-                  I'm a passionate Software Engineer with a unique blend of technical expertise, creative design skills, and comprehensive IT support experience. My journey spans from developing cutting-edge mobile applications to creating stunning visual designs and providing enterprise-level IT solutions.
+                <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                  I'm a passionate Software Engineer with expertise in mobile app development, 
+                  web technologies, and creative design. My journey combines technical proficiency 
+                  with aesthetic sensibility to create digital solutions that are both functional and beautiful.
                 </p>
-                <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
-                  With a strong foundation in software development and a keen eye for design aesthetics, I bridge the gap between functionality and visual appeal to deliver exceptional digital experiences that users love.
+                <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                  Currently pursuing my BS in Software Engineering at the University of Lahore, 
+                  I've developed a comprehensive skill set spanning from Flutter development to 
+                  graphic design and IT support services.
                 </p>
                 <div className="grid sm:grid-cols-2 gap-6 pt-6">
-                  <div className="p-6 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200/50 dark:border-blue-700/50">
-                    <h4 className="font-bold text-lg text-gray-900 dark:text-white mb-2">Education</h4>
-                    <p className="text-gray-600 dark:text-gray-300 font-medium">BS Software Engineering</p>
+                  <div className="p-6 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Education</h4>
+                    <p className="text-gray-600 dark:text-gray-300">BS Software Engineering</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">University of Lahore</p>
                   </div>
-                  <div className="p-6 rounded-xl bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 border border-purple-200/50 dark:border-purple-700/50">
-                    <h4 className="font-bold text-lg text-gray-900 dark:text-white mb-2">Location</h4>
-                    <p className="text-gray-600 dark:text-gray-300 font-medium">Bajaur, KPK</p>
+                  <div className="p-6 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Location</h4>
+                    <p className="text-gray-600 dark:text-gray-300">Bajaur, KPK</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">Pakistan</p>
                   </div>
                 </div>
@@ -309,16 +325,11 @@ const Index = () => {
             
             <AnimatedSection animation="fade-left">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-2xl blur-2xl transform rotate-3"></div>
                 <img
                   src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop"
                   alt="Coding workspace"
-                  className="relative rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
+                  className="rounded-lg shadow-lg"
                 />
-                <div className="absolute -bottom-8 -right-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300">
-                  <div className="text-4xl font-bold">3+</div>
-                  <div className="text-sm opacity-90">Years Experience</div>
-                </div>
               </div>
             </AnimatedSection>
           </div>
@@ -326,19 +337,14 @@ const Index = () => {
       </section>
 
       {/* Enhanced Skills Section */}
-      <section id="skills" className="py-20 lg:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50 dark:from-blue-900/20 dark:via-transparent dark:to-purple-900/20"></div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <section id="skills" className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection animation="fade-up">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  Skills & Expertise
-                </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Skills & Expertise
               </h2>
-              <div className="w-32 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
+              <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
             </div>
           </AnimatedSection>
           
@@ -352,20 +358,68 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Enhanced Projects Section */}
-      <section id="projects" className="py-20 lg:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-50/30 via-transparent to-pink-50/30 dark:from-purple-900/10 dark:via-transparent dark:to-pink-900/10"></div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      {/* Experience Section */}
+      <section id="experience" className="py-20 bg-gray-50 dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection animation="fade-up">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  Featured Projects
-                </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Experience
               </h2>
-              <div className="w-32 h-1 bg-gradient-to-r from-purple-600 to-pink-600 mx-auto rounded-full"></div>
+              <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
+            </div>
+          </AnimatedSection>
+
+          <div className="space-y-8">
+            <AnimatedSection animation="fade-up" delay={200}>
+              <Card className="p-8 bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
+                <CardContent className="p-0">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Freelance Developer & Designer</h3>
+                      <p className="text-blue-600 dark:text-blue-400">Fiverr Platform</p>
+                    </div>
+                    <div className="text-gray-500 dark:text-gray-400 mt-2 md:mt-0">2021 - Present</div>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Providing comprehensive digital solutions including mobile app development, 
+                    graphic design, and IT support services to clients worldwide. Specialized in 
+                    Flutter development and Adobe Creative Suite.
+                  </p>
+                </CardContent>
+              </Card>
+            </AnimatedSection>
+
+            <AnimatedSection animation="fade-up" delay={400}>
+              <Card className="p-8 bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
+                <CardContent className="p-0">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Software Engineering Student</h3>
+                      <p className="text-blue-600 dark:text-blue-400">University of Lahore</p>
+                    </div>
+                    <div className="text-gray-500 dark:text-gray-400 mt-2 md:mt-0">2020 - 2024</div>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Pursuing Bachelor's degree in Software Engineering with focus on modern 
+                    development practices, algorithms, and software architecture principles.
+                  </p>
+                </CardContent>
+              </Card>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Enhanced Projects Section */}
+      <section id="projects" className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection animation="fade-up">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Featured Projects
+              </h2>
+              <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
             </div>
           </AnimatedSection>
           
@@ -380,20 +434,15 @@ const Index = () => {
       </section>
 
       {/* Enhanced Contact Section */}
-      <section id="contact" className="py-20 lg:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-green-50/30 via-transparent to-blue-50/30 dark:from-green-900/10 dark:via-transparent dark:to-blue-900/10"></div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection animation="fade-up">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-                <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-                  Get In Touch
-                </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Get In Touch
               </h2>
-              <div className="w-32 h-1 bg-gradient-to-r from-green-600 to-blue-600 mx-auto rounded-full"></div>
-              <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mt-6 max-w-2xl mx-auto">
+              <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
+              <p className="text-lg text-gray-600 dark:text-gray-300 mt-6 max-w-2xl mx-auto">
                 Ready to work together? Let's discuss your next project and bring your ideas to life.
               </p>
             </div>
@@ -402,24 +451,24 @@ const Index = () => {
           <div className="grid lg:grid-cols-2 gap-12">
             <AnimatedSection animation="fade-right">
               <div className="space-y-8">
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-8">Contact Information</h3>
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Contact Information</h3>
                 <div className="space-y-6">
-                  <div className="flex items-center space-x-6 p-6 rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200/50 dark:border-blue-700/50 hover:shadow-lg transition-all duration-300">
-                    <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg">
-                      <Mail className="text-white" size={24} />
+                  <div className="flex items-center space-x-4 p-6 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
+                    <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+                      <Mail className="text-white" size={20} />
                     </div>
                     <div>
-                      <h4 className="font-bold text-lg text-gray-900 dark:text-white">Email</h4>
+                      <h4 className="font-semibold text-gray-900 dark:text-white">Email</h4>
                       <p className="text-gray-600 dark:text-gray-300">contact@naveedalam.pro</p>
                     </div>
                   </div>
                   
-                  <div className="flex items-center space-x-6 p-6 rounded-xl bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 border border-purple-200/50 dark:border-purple-700/50 hover:shadow-lg transition-all duration-300">
-                    <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg">
-                      <MapPin className="text-white" size={24} />
+                  <div className="flex items-center space-x-4 p-6 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
+                    <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center">
+                      <MapPin className="text-white" size={20} />
                     </div>
                     <div>
-                      <h4 className="font-bold text-lg text-gray-900 dark:text-white">Location</h4>
+                      <h4 className="font-semibold text-gray-900 dark:text-white">Location</h4>
                       <p className="text-gray-600 dark:text-gray-300">Bajaur, KPK, Pakistan</p>
                     </div>
                   </div>
@@ -428,39 +477,39 @@ const Index = () => {
             </AnimatedSection>
             
             <AnimatedSection animation="fade-left">
-              <Card className="p-8 bg-white/50 dark:bg-gray-800/50 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 shadow-2xl">
+              <Card className="p-8 bg-white dark:bg-gray-700 shadow-sm">
                 <CardContent className="p-0">
                   <form onSubmit={handleContactSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                           Name
                         </label>
-                        <Input id="name" required className="border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-xl px-4 py-3" />
+                        <Input id="name" required className="border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400" />
                       </div>
                       <div>
-                        <label htmlFor="email" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                           Email
                         </label>
-                        <Input id="email" type="email" required className="border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-xl px-4 py-3" />
+                        <Input id="email" type="email" required className="border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400" />
                       </div>
                     </div>
                     
                     <div>
-                      <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                      <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Subject
                       </label>
-                      <Input id="subject" required className="border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-xl px-4 py-3" />
+                      <Input id="subject" required className="border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400" />
                     </div>
                     
                     <div>
-                      <label htmlFor="message" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Message
                       </label>
-                      <Textarea id="message" rows={6} required className="border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-xl px-4 py-3" />
+                      <Textarea id="message" rows={5} required className="border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400" />
                     </div>
                     
-                    <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                    <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 shadow-lg hover:shadow-xl transition-all duration-300">
                       Send Message
                     </Button>
                   </form>
@@ -472,19 +521,16 @@ const Index = () => {
       </section>
 
       {/* Enhanced Footer */}
-      <footer className="relative overflow-hidden py-16">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-transparent to-black/50"></div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <div className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               Naveed Alam
             </div>
-            <p className="text-gray-400 mb-8 text-lg">
-              Built with ❤️ by Naveed Alam – © 2025. All rights reserved.
+            <p className="text-gray-400 mb-8">
+              © 2025 Naveed Alam. All rights reserved.
             </p>
-            <div className="flex justify-center space-x-8">
+            <div className="flex justify-center space-x-6">
               {[
                 { name: 'Facebook', href: '#' },
                 { name: 'Instagram', href: '#' },
@@ -496,7 +542,7 @@ const Index = () => {
                   href={social.href}
                   target={social.href.startsWith('http') ? '_blank' : undefined}
                   rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110 hover:-translate-y-1"
+                  className="text-gray-400 hover:text-white transition-colors duration-300"
                 >
                   {social.name}
                 </a>
@@ -506,14 +552,14 @@ const Index = () => {
         </div>
       </footer>
 
-      {/* Enhanced Back to Top Button */}
+      {/* Back to Top Button */}
       {showBackToTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-blue-500/25 z-40 group"
+          className="fixed bottom-8 right-8 w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 z-40"
           aria-label="Back to top"
         >
-          <ArrowUp size={20} className="group-hover:animate-bounce" />
+          <ArrowUp size={20} />
         </button>
       )}
     </div>

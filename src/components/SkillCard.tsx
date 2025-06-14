@@ -11,27 +11,23 @@ interface SkillCardProps {
 
 const SkillCard = ({ title, skills, icon, gradient }: SkillCardProps) => {
   return (
-    <Card className="group relative overflow-hidden border-0 bg-white/5 backdrop-blur-md hover:bg-white/10 transition-all duration-500 hover:scale-105 hover:shadow-2xl">
-      <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-white/5"></div>
-      
-      <CardContent className="p-6 relative z-10">
-        <div className="flex items-center space-x-3 mb-4">
-          <div className={`p-3 rounded-xl bg-gradient-to-r ${gradient} shadow-lg`}>
+    <Card className="group relative overflow-hidden bg-white dark:bg-gray-700 hover:shadow-lg transition-all duration-300 hover:scale-105 border border-gray-200 dark:border-gray-600">
+      <CardContent className="p-6">
+        <div className="flex items-center space-x-3 mb-6">
+          <div className={`p-3 rounded-lg bg-gradient-to-r ${gradient} shadow-sm`}>
             {icon}
           </div>
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
             {title}
           </h3>
         </div>
         
         <div className="flex flex-wrap gap-2">
-          {skills.map((skill, index) => (
+          {skills.map((skill) => (
             <Badge 
               key={skill} 
               variant="secondary" 
-              className="bg-white/10 hover:bg-white/20 text-gray-700 dark:text-gray-300 border border-white/20 transition-all duration-300 hover:scale-105"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-500 transition-colors duration-200"
             >
               {skill}
             </Badge>
