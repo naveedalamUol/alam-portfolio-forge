@@ -11,6 +11,7 @@ import FloatingElements from '@/components/FloatingElements';
 import SkillCard from '@/components/SkillCard';
 import ProjectCard from '@/components/ProjectCard';
 import Header from '@/components/Header';
+
 const Index = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -228,12 +229,12 @@ const Index = () => {
               <div className="space-y-6">
                 <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                   I'm a passionate Software Engineer with expertise in mobile app development, 
-                  web technologies, and creative design. My journey combines technical proficiency 
-                  with aesthetic sensibility to create digital solutions that are both functional and beautiful.
+                  web technologies, and creative design. My journey blends technical proficiency 
+                  with aesthetic sensibility to craft digital solutions that are both functional and visually engaging.
                 </p>
                 <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Currently pursuing my BS in Software Engineering at the University of Lahore, 
-                  I've developed a comprehensive skill set spanning from React development to 
+                  Having completed my BS in Software Engineering from the University of Lahore, 
+                  I've built a diverse skill set ranging from React development to 
                   graphic design and IT support services.
                 </p>
                 <div className="grid sm:grid-cols-2 gap-6 pt-6">
@@ -244,7 +245,7 @@ const Index = () => {
                   </div>
                   <div className="p-6 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
                     <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Location</h4>
-                    <p className="text-gray-600 dark:text-gray-300">I-8, ISLAMABAD</p>
+                    <p className="text-gray-600 dark:text-gray-300">I-8, ISLAMABAD, Pakistan</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">Pakistan</p>
                   </div>
                 </div>
