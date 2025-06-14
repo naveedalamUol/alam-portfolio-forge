@@ -11,7 +11,6 @@ import FloatingElements from '@/components/FloatingElements';
 import SkillCard from '@/components/SkillCard';
 import ProjectCard from '@/components/ProjectCard';
 import Header from '@/components/Header';
-
 const Index = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -390,7 +389,7 @@ const Index = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-900 dark:text-white">Location</h4>
-                      <p className="text-gray-600 dark:text-gray-300">Bajaur, KPK, Pakistan</p>
+                      <p className="text-gray-600 dark:text-gray-300">I-8, ISLAMABAD, Pakistan</p>
                     </div>
                   </div>
                 </div>
@@ -478,5 +477,4 @@ const Index = () => {
         </button>}
     </div>;
 };
-
 export default Index;
