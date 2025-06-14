@@ -96,7 +96,7 @@ const Index = () => {
   }];
   const skillCategories = [{
     title: 'Technical Skills',
-    skills: ['Flutter', 'Firebase', 'Android Studio', 'IT Support', 'Troubleshooting', 'Python', 'Java'],
+    skills: ['React', 'Firebase', 'Android Studio', 'IT Support', 'Troubleshooting', 'Python', 'Java'],
     icon: <Code className="w-6 h-6 text-white" />,
     gradient: 'from-blue-500 to-cyan-500'
   }, {
