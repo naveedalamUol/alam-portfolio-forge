@@ -474,7 +474,7 @@ const Index = () => {
                 { name: 'Facebook', href: '#' },
                 { name: 'Instagram', href: '#' },
                 { name: 'Fiverr', href: 'https://fiverr.com/g_designer6' },
-                { name: 'LinkedIn', href: '#' }
+                { name: 'LinkedIn', href: 'https://www.linkedin.com/in/naveed-alam9/' }
               ].map((social) => (
                 <a
                   key={social.name}
