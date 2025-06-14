@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { Moon, Sun, Menu, X, ArrowUp, Mail, MapPin, ExternalLink, Download, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -22,14 +21,42 @@ const Index = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Initialize dark mode from localStorage or system preference
+  useEffect(() => {
+    const savedDarkMode = localStorage.getItem('darkMode');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialDarkMode = savedDarkMode ? JSON.parse(savedDarkMode) : systemPrefersDark;
+    
+    setDarkMode(initialDarkMode);
+    if (initialDarkMode) {
+      document.documentElement.classList.add('dark');
+    }
+  }, []);
+
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.documentElement.classList.toggle('dark');
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    
+    if (newDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    
+    localStorage.setItem('darkMode', JSON.stringify(newDarkMode));
   };
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
-    element?.scrollIntoView({ behavior: 'smooth' });
+    if (element) {
+      const headerHeight = 80; // Account for fixed header
+      const elementPosition = element.offsetTop - headerHeight;
+      
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
+    }
     setMobileMenuOpen(false);
   };
 
@@ -99,12 +126,15 @@ const Index = () => {
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark' : ''}`}>
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-md z-50 border-b border-gray-200 dark:border-gray-700">
+      <nav className="fixed top-0 w-full bg-white/95 dark:bg-gray-900/95 backdrop-blur-md z-50 border-b border-gray-200 dark:border-gray-700 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+          <div className="flex justify-between items-center h-20">
+            <button
+              onClick={() => scrollToSection('hero')}
+              className="text-2xl font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200"
+            >
               Naveed Alam
-            </div>
+            </button>
             
             {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
@@ -112,7 +142,7 @@ const Index = () => {
                 <button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
-                  className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+                  className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
                 >
                   {item.label}
                 </button>
@@ -124,13 +154,15 @@ const Index = () => {
               <button
                 onClick={toggleDarkMode}
                 className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+                aria-label="Toggle dark mode"
               >
                 {darkMode ? <Sun size={20} /> : <Moon size={20} />}
               </button>
               
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
+                className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+                aria-label="Toggle mobile menu"
               >
                 {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
@@ -139,25 +171,29 @@ const Index = () => {
         </div>
 
         {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+        <div className={`md:hidden transition-all duration-300 ease-in-out ${
+          mobileMenuOpen 
+            ? 'max-h-80 opacity-100' 
+            : 'max-h-0 opacity-0 overflow-hidden'
+        }`}>
+          <div className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-lg">
+            <div className="px-4 py-3 space-y-2">
               {navItems.map((item) => (
                 <button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
-                  className="block w-full text-left px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors duration-200"
+                  className="block w-full text-left px-3 py-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors duration-200 font-medium"
                 >
                   {item.label}
                 </button>
               ))}
             </div>
           </div>
-        )}
+        </div>
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900 pt-16">
+      <section id="hero" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900 pt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="animate-fade-in">
             <img
@@ -535,6 +571,7 @@ const Index = () => {
         <button
           onClick={scrollToTop}
           className="fixed bottom-8 right-8 w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 z-40"
+          aria-label="Back to top"
         >
           <ArrowUp size={20} />
         </button>
