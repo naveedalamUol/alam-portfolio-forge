@@ -11,6 +11,7 @@ import FloatingElements from '@/components/FloatingElements';
 import SkillCard from '@/components/SkillCard';
 import ProjectCard from '@/components/ProjectCard';
 import Header from '@/components/Header';
+
 const Index = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -233,7 +234,7 @@ const Index = () => {
                 </p>
                 <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                   Currently pursuing my BS in Software Engineering at the University of Lahore, 
-                  I've developed a comprehensive skill set spanning from Flutter development to 
+                  I've developed a comprehensive skill set spanning from React development to 
                   graphic design and IT support services.
                 </p>
                 <div className="grid sm:grid-cols-2 gap-6 pt-6">
@@ -306,7 +307,7 @@ const Index = () => {
                   <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                     Providing comprehensive digital solutions including mobile app development, 
                     graphic design, and IT support services to clients worldwide. Specialized in 
-                    Flutter development and Adobe Creative Suite.
+                    React development and Adobe Creative Suite.
                   </p>
                 </CardContent>
               </Card>
@@ -477,4 +478,5 @@ const Index = () => {
         </button>}
     </div>;
 };
+
 export default Index;
