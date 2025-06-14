@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { ArrowUp, Mail, MapPin, ExternalLink, Download, Star, Code, Palette, Settings, Zap, Award, Users, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -337,10 +338,10 @@ const Index = () => {
                       <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Software Engineering Student</h3>
                       <p className="text-blue-600 dark:text-blue-400">University of Lahore</p>
                     </div>
-                    <div className="text-gray-500 dark:text-gray-400 mt-2 md:mt-0">2020 - 2024</div>
+                    <div className="text-gray-500 dark:text-gray-400 mt-2 md:mt-0">2016 - 2021</div>
                   </div>
                   <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                    Pursuing Bachelor's degree in Software Engineering with focus on modern 
+                    Completed Bachelor's degree in Software Engineering with focus on modern 
                     development practices, algorithms, and software architecture principles.
                   </p>
                 </CardContent>
