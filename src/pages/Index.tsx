@@ -1,19 +1,27 @@
+
 import { useEffect, useState } from 'react';
-import { Moon, Sun, Menu, X, ArrowUp, Mail, MapPin, ExternalLink, Download, Star } from 'lucide-react';
+import { Moon, Sun, Menu, X, ArrowUp, Mail, MapPin, ExternalLink, Download, Star, Code, Palette, Settings, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import LoadingScreen from '@/components/LoadingScreen';
+import AnimatedSection from '@/components/AnimatedSection';
+import FloatingElements from '@/components/FloatingElements';
+import SkillCard from '@/components/SkillCard';
+import ProjectCard from '@/components/ProjectCard';
 
 const Index = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setShowBackToTop(window.scrollY > 400);
     };
@@ -21,7 +29,7 @@ const Index = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Initialize dark mode from localStorage or system preference
+  // Initialize dark mode
   useEffect(() => {
     const savedDarkMode = localStorage.getItem('darkMode');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -49,7 +57,7 @@ const Index = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const headerHeight = 80; // Account for fixed header
+      const headerHeight = 80;
       const elementPosition = element.offsetTop - headerHeight;
       
       window.scrollTo({
@@ -81,79 +89,86 @@ const Index = () => {
     { label: 'Contact', href: 'contact' }
   ];
 
-  const skills = {
-    technical: ['Flutter', 'Firebase', 'Android Studio', 'IT Support', 'Troubleshooting', 'Python', 'Java'],
-    design: ['Adobe Photoshop', 'Adobe Illustrator', 'UI/UX Design', 'Logo Design'],
-    others: ['SEO', 'Social Media Marketing', 'Cloud Computing', 'Cybersecurity', 'Data Science']
-  };
-
-  const experience = [
+  const skillCategories = [
     {
-      title: 'IT Officer',
-      company: 'Bajaur Medical Complex',
-      period: '2023 - Present',
-      description: 'Managing IT infrastructure, providing technical support, and ensuring system reliability.'
+      title: 'Technical Skills',
+      skills: ['Flutter', 'Firebase', 'Android Studio', 'IT Support', 'Troubleshooting', 'Python', 'Java'],
+      icon: <Code className="w-6 h-6 text-white" />,
+      gradient: 'from-blue-500 to-cyan-500'
     },
     {
-      title: 'Graphic Designer',
-      company: 'Softzala',
-      period: '2022 - 2023',
-      description: 'Created visual designs for digital platforms and marketing materials.'
+      title: 'Design Skills',
+      skills: ['Adobe Photoshop', 'Adobe Illustrator', 'UI/UX Design', 'Logo Design'],
+      icon: <Palette className="w-6 h-6 text-white" />,
+      gradient: 'from-purple-500 to-pink-500'
     },
     {
-      title: 'IT Support Specialist',
-      company: 'PUBGSTUFF',
-      period: '2021 - 2022',
-      description: 'Provided technical support and system maintenance for gaming platform.'
-    },
-    {
-      title: 'Freelance Graphic Designer',
-      company: 'Fiverr',
-      period: '2020 - Present',
-      description: 'Level One seller with 10+ successful projects in logo and brand design.'
+      title: 'Other Skills',
+      skills: ['SEO', 'Social Media Marketing', 'Cloud Computing', 'Cybersecurity', 'Data Science'],
+      icon: <Settings className="w-6 h-6 text-white" />,
+      gradient: 'from-green-500 to-teal-500'
     }
   ];
 
-  const certifications = [
-    'IoT Fundamentals',
-    'Machine Learning Basics',
-    'Cybersecurity Essentials',
-    'SEO Optimization',
-    'Cloud Computing',
-    'Data Science'
+  const projects = [
+    {
+      title: 'Tour Explorer App',
+      description: 'A comprehensive mobile application built with Flutter and Firebase for discovering and booking travel experiences with real-time updates.',
+      image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=300&fit=crop',
+      tags: ['Flutter', 'Firebase', 'Android Studio', 'Real-time'],
+      liveUrl: '#',
+      githubUrl: '#'
+    },
+    {
+      title: 'AI-Powered Web Solutions',
+      description: 'Modern web applications featuring AI integration, responsive design, and cloud-based architecture for enhanced user experiences.',
+      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=300&fit=crop',
+      tags: ['React', 'AI/ML', 'Cloud', 'TypeScript'],
+      liveUrl: '#',
+      githubUrl: '#'
+    }
   ];
 
+  if (!mounted) return null;
+
+  if (isLoading) {
+    return <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />;
+  }
+
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark' : ''}`}>
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/95 dark:bg-gray-900/95 backdrop-blur-md z-50 border-b border-gray-200 dark:border-gray-700 shadow-sm">
+    <div className={`min-h-screen transition-all duration-500 ${darkMode ? 'dark' : ''}`}>
+      <FloatingElements />
+      
+      {/* Enhanced Navigation */}
+      <nav className="fixed top-0 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl z-50 border-b border-gray-200/50 dark:border-gray-700/50 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <button
               onClick={() => scrollToSection('hero')}
-              className="text-2xl font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200"
+              className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
             >
               Naveed Alam
             </button>
             
             {/* Desktop Navigation */}
-            <div className="hidden md:flex space-x-8">
+            <div className="hidden md:flex space-x-2">
               {navItems.map((item) => (
                 <button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
-                  className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+                  className="relative px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 font-medium rounded-lg hover:bg-gray-100/50 dark:hover:bg-gray-800/50 group"
                 >
                   {item.label}
+                  <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
                 </button>
               ))}
             </div>
 
-            {/* Dark Mode Toggle & Mobile Menu */}
+            {/* Controls */}
             <div className="flex items-center space-x-4">
               <button
                 onClick={toggleDarkMode}
-                className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+                className="p-3 rounded-xl bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 text-gray-700 dark:text-gray-300 hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-900 dark:hover:to-purple-900 transition-all duration-300 transform hover:scale-110 hover:rotate-12"
                 aria-label="Toggle dark mode"
               >
                 {darkMode ? <Sun size={20} /> : <Moon size={20} />}
@@ -161,7 +176,7 @@ const Index = () => {
               
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+                className="md:hidden p-3 rounded-xl bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 text-gray-700 dark:text-gray-300 hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-900 dark:hover:to-purple-900 transition-all duration-300 transform hover:scale-110"
                 aria-label="Toggle mobile menu"
               >
                 {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -170,19 +185,20 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        <div className={`md:hidden transition-all duration-300 ease-in-out ${
+        {/* Enhanced Mobile Navigation */}
+        <div className={`md:hidden transition-all duration-500 ease-in-out ${
           mobileMenuOpen 
-            ? 'max-h-80 opacity-100' 
+            ? 'max-h-96 opacity-100' 
             : 'max-h-0 opacity-0 overflow-hidden'
         }`}>
-          <div className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-lg">
-            <div className="px-4 py-3 space-y-2">
-              {navItems.map((item) => (
+          <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-t border-gray-200/50 dark:border-gray-700/50 shadow-xl">
+            <div className="px-4 py-6 space-y-2">
+              {navItems.map((item, index) => (
                 <button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
-                  className="block w-full text-left px-3 py-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors duration-200 font-medium"
+                  className="block w-full text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/30 dark:hover:to-purple-900/30 rounded-xl transition-all duration-300 font-medium transform hover:translate-x-2"
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {item.label}
                 </button>
@@ -192,388 +208,312 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900 pt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="animate-fade-in">
-            <img
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face"
-              alt="Naveed Alam"
-              className="w-48 h-48 rounded-full mx-auto mb-8 shadow-2xl ring-4 ring-blue-500/20 dark:ring-blue-400/30 hover:scale-105 transition-transform duration-300"
-            />
-            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6">
-              Naveed Alam
+      {/* Enhanced Hero Section */}
+      <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-purple-600/5"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 pt-20">
+          <AnimatedSection animation="fade-up">
+            <div className="relative mb-8">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-full blur-2xl transform scale-150 animate-pulse"></div>
+              <img
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face"
+                alt="Naveed Alam"
+                className="relative w-48 h-48 md:w-56 md:h-56 rounded-full mx-auto shadow-2xl ring-4 ring-blue-500/30 dark:ring-blue-400/40 hover:scale-105 transition-all duration-500 hover:shadow-blue-500/25"
+              />
+            </div>
+          </AnimatedSection>
+          
+          <AnimatedSection animation="fade-up" delay={200}>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-pulse">
+                Naveed Alam
+              </span>
             </h1>
-            <p className="text-xl md:text-2xl text-blue-600 dark:text-blue-400 mb-6 font-medium">
+          </AnimatedSection>
+          
+          <AnimatedSection animation="fade-up" delay={400}>
+            <p className="text-xl md:text-2xl lg:text-3xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6 font-semibold">
               Software Engineer | Graphic Designer | IT Specialist
             </p>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
-              Building solutions that merge design, tech, and support seamlessly.
+          </AnimatedSection>
+          
+          <AnimatedSection animation="fade-up" delay={600}>
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+              Building solutions that merge design, technology, and support seamlessly to create exceptional digital experiences.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3">
+          </AnimatedSection>
+          
+          <AnimatedSection animation="fade-up" delay={800}>
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                 <Download className="mr-2" size={20} />
                 View Resume
               </Button>
-              <Button size="lg" variant="outline" onClick={() => scrollToSection('contact')} className="px-8 py-3">
+              <Button size="lg" onClick={() => scrollToSection('contact')} className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                <Zap className="mr-2" size={20} />
                 Hire Me
               </Button>
-              <Button size="lg" variant="outline" asChild className="px-8 py-3">
+              <Button size="lg" variant="outline" asChild className="border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-400 px-8 py-4 rounded-xl backdrop-blur-sm hover:bg-blue-50 dark:hover:bg-blue-900/20 transform hover:scale-105 transition-all duration-300">
                 <a href="https://fiverr.com/g_designer6" target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="mr-2" size={20} />
                   Fiverr Profile
                 </a>
               </Button>
             </div>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 bg-white dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">About Me</h2>
-            <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                I'm a passionate Software Engineer with a unique blend of technical expertise, creative design skills, and IT support experience. My journey spans from developing mobile applications to creating stunning visual designs and providing comprehensive IT solutions.
-              </p>
-              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                With a strong foundation in software development and a keen eye for design, I bridge the gap between functionality and aesthetics to deliver exceptional digital experiences.
-              </p>
-              <div className="grid grid-cols-2 gap-6">
-                <div>
-                  <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Education</h4>
-                  <p className="text-gray-600 dark:text-gray-300">BS Software Engineering</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">University of Lahore</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Location</h4>
-                  <p className="text-gray-600 dark:text-gray-300">Bajaur, KPK</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Pakistan</p>
-                </div>
-              </div>
+      {/* Enhanced About Section */}
+      <section id="about" className="py-20 lg:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-transparent to-purple-50/30 dark:from-blue-900/10 dark:via-transparent dark:to-purple-900/10"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <AnimatedSection animation="fade-up">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  About Me
+                </span>
+              </h2>
+              <div className="w-32 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
             </div>
-            
-            <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop"
-                alt="Coding workspace"
-                className="rounded-lg shadow-2xl"
-              />
-              <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-lg shadow-xl">
-                <div className="text-3xl font-bold">3+</div>
-                <div className="text-sm">Years Experience</div>
+          </AnimatedSection>
+          
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <AnimatedSection animation="fade-right">
+              <div className="space-y-6">
+                <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                  I'm a passionate Software Engineer with a unique blend of technical expertise, creative design skills, and comprehensive IT support experience. My journey spans from developing cutting-edge mobile applications to creating stunning visual designs and providing enterprise-level IT solutions.
+                </p>
+                <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                  With a strong foundation in software development and a keen eye for design aesthetics, I bridge the gap between functionality and visual appeal to deliver exceptional digital experiences that users love.
+                </p>
+                <div className="grid sm:grid-cols-2 gap-6 pt-6">
+                  <div className="p-6 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200/50 dark:border-blue-700/50">
+                    <h4 className="font-bold text-lg text-gray-900 dark:text-white mb-2">Education</h4>
+                    <p className="text-gray-600 dark:text-gray-300 font-medium">BS Software Engineering</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">University of Lahore</p>
+                  </div>
+                  <div className="p-6 rounded-xl bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 border border-purple-200/50 dark:border-purple-700/50">
+                    <h4 className="font-bold text-lg text-gray-900 dark:text-white mb-2">Location</h4>
+                    <p className="text-gray-600 dark:text-gray-300 font-medium">Bajaur, KPK</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Pakistan</p>
+                  </div>
+                </div>
               </div>
+            </AnimatedSection>
+            
+            <AnimatedSection animation="fade-left">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-2xl blur-2xl transform rotate-3"></div>
+                <img
+                  src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop"
+                  alt="Coding workspace"
+                  className="relative rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute -bottom-8 -right-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300">
+                  <div className="text-4xl font-bold">3+</div>
+                  <div className="text-sm opacity-90">Years Experience</div>
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Enhanced Skills Section */}
+      <section id="skills" className="py-20 lg:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50 dark:from-blue-900/20 dark:via-transparent dark:to-purple-900/20"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <AnimatedSection animation="fade-up">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  Skills & Expertise
+                </span>
+              </h2>
+              <div className="w-32 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-20 bg-gray-50 dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Skills & Expertise</h2>
-            <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
-          </div>
+          </AnimatedSection>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="p-6 hover:shadow-lg transition-shadow duration-300">
-              <CardContent className="p-0">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Technical Skills</h3>
-                <div className="flex flex-wrap gap-2">
-                  {skills.technical.map((skill) => (
-                    <Badge key={skill} variant="secondary" className="hover:bg-blue-100 hover:text-blue-800 dark:hover:bg-blue-900 dark:hover:text-blue-200 transition-colors">
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card className="p-6 hover:shadow-lg transition-shadow duration-300">
-              <CardContent className="p-0">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Design Skills</h3>
-                <div className="flex flex-wrap gap-2">
-                  {skills.design.map((skill) => (
-                    <Badge key={skill} variant="secondary" className="hover:bg-purple-100 hover:text-purple-800 dark:hover:bg-purple-900 dark:hover:text-purple-200 transition-colors">
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card className="p-6 hover:shadow-lg transition-shadow duration-300">
-              <CardContent className="p-0">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Other Skills</h3>
-                <div className="flex flex-wrap gap-2">
-                  {skills.others.map((skill) => (
-                    <Badge key={skill} variant="secondary" className="hover:bg-green-100 hover:text-green-800 dark:hover:bg-green-900 dark:hover:text-green-200 transition-colors">
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Experience Timeline */}
-      <section id="experience" className="py-20 bg-white dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Experience Timeline</h2>
-            <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
-          </div>
-          
-          <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-blue-600"></div>
-            
-            {experience.map((exp, index) => (
-              <div key={index} className={`mb-12 flex ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
-                <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
-                  <Card className="p-6 hover:shadow-lg transition-shadow duration-300">
-                    <CardContent className="p-0">
-                      <div className="text-sm text-blue-600 dark:text-blue-400 font-medium mb-1">{exp.period}</div>
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{exp.title}</h3>
-                      <h4 className="text-lg text-gray-600 dark:text-gray-300 mb-3">{exp.company}</h4>
-                      <p className="text-gray-600 dark:text-gray-300">{exp.description}</p>
-                    </CardContent>
-                  </Card>
-                </div>
-                
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-600 rounded-full border-4 border-white dark:border-gray-900 shadow-lg" style={{ top: `${index * 12 * 16 + 24}px` }}></div>
-              </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {skillCategories.map((category, index) => (
+              <AnimatedSection key={category.title} animation="fade-up" delay={index * 200}>
+                <SkillCard {...category} />
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Featured Projects</h2>
-            <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
-          </div>
+      {/* Enhanced Projects Section */}
+      <section id="projects" className="py-20 lg:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-50/30 via-transparent to-pink-50/30 dark:from-purple-900/10 dark:via-transparent dark:to-pink-900/10"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <AnimatedSection animation="fade-up">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  Featured Projects
+                </span>
+              </h2>
+              <div className="w-32 h-1 bg-gradient-to-r from-purple-600 to-pink-600 mx-auto rounded-full"></div>
+            </div>
+          </AnimatedSection>
           
           <div className="grid md:grid-cols-2 gap-8">
-            <Card className="overflow-hidden hover:shadow-2xl transition-shadow duration-300">
-              <img
-                src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=300&fit=crop"
-                alt="Tour Explorer App"
-                className="w-full h-48 object-cover"
-              />
-              <CardContent className="p-6">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Tour Explorer App</h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  A comprehensive mobile application built with Flutter and Firebase for discovering and booking travel experiences.
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <Badge>Flutter</Badge>
-                  <Badge>Firebase</Badge>
-                  <Badge>Android Studio</Badge>
-                </div>
-                <Button variant="outline" className="w-full">
-                  <ExternalLink className="mr-2" size={16} />
-                  View Project
-                </Button>
-              </CardContent>
-            </Card>
-            
-            <Card className="overflow-hidden hover:shadow-2xl transition-shadow duration-300">
-              <img
-                src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=300&fit=crop"
-                alt="Upcoming Projects"
-                className="w-full h-48 object-cover"
-              />
-              <CardContent className="p-6">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Upcoming Projects</h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  Exciting new projects in development including AI-powered applications and modern web solutions.
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <Badge variant="outline">React</Badge>
-                  <Badge variant="outline">AI/ML</Badge>
-                  <Badge variant="outline">Cloud</Badge>
-                </div>
-                <Button variant="outline" className="w-full" disabled>
-                  Coming Soon
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Certifications */}
-      <section className="py-20 bg-white dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Certifications</h2>
-            <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {certifications.map((cert) => (
-              <Card key={cert} className="p-4 text-center hover:shadow-lg transition-shadow duration-300">
-                <CardContent className="p-0">
-                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Star className="text-blue-600 dark:text-blue-400" size={24} />
-                  </div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">{cert}</p>
-                </CardContent>
-              </Card>
+            {projects.map((project, index) => (
+              <AnimatedSection key={project.title} animation="fade-up" delay={index * 200}>
+                <ProjectCard {...project} />
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Fiverr Section */}
-      <section className="py-20 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900 dark:to-blue-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-8">Fiverr Success Story</h2>
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-2xl max-w-2xl mx-auto">
-            <div className="flex items-center justify-center mb-6">
-              <div className="text-6xl font-bold text-green-600">10+</div>
-              <div className="ml-4 text-left">
-                <div className="text-xl font-semibold text-gray-900 dark:text-white">Completed Orders</div>
-                <div className="text-gray-600 dark:text-gray-300">Level One Seller</div>
-              </div>
+      {/* Enhanced Contact Section */}
+      <section id="contact" className="py-20 lg:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-green-50/30 via-transparent to-blue-50/30 dark:from-green-900/10 dark:via-transparent dark:to-blue-900/10"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <AnimatedSection animation="fade-up">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+                  Get In Touch
+                </span>
+              </h2>
+              <div className="w-32 h-1 bg-gradient-to-r from-green-600 to-blue-600 mx-auto rounded-full"></div>
+              <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mt-6 max-w-2xl mx-auto">
+                Ready to work together? Let's discuss your next project and bring your ideas to life.
+              </p>
             </div>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-              Successfully delivering high-quality graphic design solutions to clients worldwide with excellent ratings and reviews.
-            </p>
-            <Button asChild className="bg-green-600 hover:bg-green-700 text-white">
-              <a href="https://fiverr.com/g_designer6" target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="mr-2" size={20} />
-                Visit My Fiverr Profile
-              </a>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Get In Touch</h2>
-            <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mt-6">
-              Ready to work together? Let's discuss your next project.
-            </p>
-          </div>
+          </AnimatedSection>
           
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Contact Information</h3>
-              <div className="space-y-4">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
-                    <Mail className="text-blue-600 dark:text-blue-400" size={20} />
+          <div className="grid lg:grid-cols-2 gap-12">
+            <AnimatedSection animation="fade-right">
+              <div className="space-y-8">
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-8">Contact Information</h3>
+                <div className="space-y-6">
+                  <div className="flex items-center space-x-6 p-6 rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200/50 dark:border-blue-700/50 hover:shadow-lg transition-all duration-300">
+                    <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg">
+                      <Mail className="text-white" size={24} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg text-gray-900 dark:text-white">Email</h4>
+                      <p className="text-gray-600 dark:text-gray-300">contact@naveedalam.pro</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white">Email</h4>
-                    <p className="text-gray-600 dark:text-gray-300">contact@naveedalam.pro</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
-                    <MapPin className="text-blue-600 dark:text-blue-400" size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white">Location</h4>
-                    <p className="text-gray-600 dark:text-gray-300">Bajaur, KPK, Pakistan</p>
+                  
+                  <div className="flex items-center space-x-6 p-6 rounded-xl bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 border border-purple-200/50 dark:border-purple-700/50 hover:shadow-lg transition-all duration-300">
+                    <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg">
+                      <MapPin className="text-white" size={24} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg text-gray-900 dark:text-white">Location</h4>
+                      <p className="text-gray-600 dark:text-gray-300">Bajaur, KPK, Pakistan</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </AnimatedSection>
             
-            <Card className="p-6">
-              <CardContent className="p-0">
-                <form onSubmit={handleContactSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Name
-                      </label>
-                      <Input id="name" required />
+            <AnimatedSection animation="fade-left">
+              <Card className="p-8 bg-white/50 dark:bg-gray-800/50 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 shadow-2xl">
+                <CardContent className="p-0">
+                  <form onSubmit={handleContactSubmit} className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                          Name
+                        </label>
+                        <Input id="name" required className="border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-xl px-4 py-3" />
+                      </div>
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                          Email
+                        </label>
+                        <Input id="email" type="email" required className="border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-xl px-4 py-3" />
+                      </div>
                     </div>
+                    
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Email
+                      <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                        Subject
                       </label>
-                      <Input id="email" type="email" required />
+                      <Input id="subject" required className="border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-xl px-4 py-3" />
                     </div>
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Subject
-                    </label>
-                    <Input id="subject" required />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Message
-                    </label>
-                    <Textarea id="message" rows={5} required />
-                  </div>
-                  
-                  <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                    Send Message
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+                    
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                        Message
+                      </label>
+                      <Textarea id="message" rows={6} required className="border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-xl px-4 py-3" />
+                    </div>
+                    
+                    <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                      Send Message
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </AnimatedSection>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Enhanced Footer */}
+      <footer className="relative overflow-hidden py-16">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-transparent to-black/50"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
-            <div className="text-2xl font-bold mb-4">Naveed Alam</div>
-            <p className="text-gray-400 mb-8">
-              Built by Naveed Alam – © 2025. All rights reserved.
+            <div className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              Naveed Alam
+            </div>
+            <p className="text-gray-400 mb-8 text-lg">
+              Built with ❤️ by Naveed Alam – © 2025. All rights reserved.
             </p>
-            <div className="flex justify-center space-x-6">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
-                Facebook
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
-                Instagram
-              </a>
-              <a href="https://fiverr.com/g_designer6" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors duration-200">
-                Fiverr
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
-                LinkedIn
-              </a>
+            <div className="flex justify-center space-x-8">
+              {[
+                { name: 'Facebook', href: '#' },
+                { name: 'Instagram', href: '#' },
+                { name: 'Fiverr', href: 'https://fiverr.com/g_designer6' },
+                { name: 'LinkedIn', href: '#' }
+              ].map((social) => (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target={social.href.startsWith('http') ? '_blank' : undefined}
+                  rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110 hover:-translate-y-1"
+                >
+                  {social.name}
+                </a>
+              ))}
             </div>
           </div>
         </div>
       </footer>
 
-      {/* Back to Top Button */}
+      {/* Enhanced Back to Top Button */}
       {showBackToTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 z-40"
+          className="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-blue-500/25 z-40 group"
           aria-label="Back to top"
         >
-          <ArrowUp size={20} />
+          <ArrowUp size={20} className="group-hover:animate-bounce" />
         </button>
       )}
     </div>
