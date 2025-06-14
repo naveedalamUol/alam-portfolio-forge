@@ -1,6 +1,5 @@
-
 import { useEffect, useState } from 'react';
-import { Moon, Sun, Menu, X, ArrowUp, Mail, MapPin, ExternalLink, Download, Star, Code, Palette, Settings, Zap, Award, Users, Clock } from 'lucide-react';
+import { ArrowUp, Mail, MapPin, ExternalLink, Download, Star, Code, Palette, Settings, Zap, Award, Users, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -11,6 +10,7 @@ import AnimatedSection from '@/components/AnimatedSection';
 import FloatingElements from '@/components/FloatingElements';
 import SkillCard from '@/components/SkillCard';
 import ProjectCard from '@/components/ProjectCard';
+import Header from '@/components/Header';
 
 const Index = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -145,73 +145,12 @@ const Index = () => {
     <div className={`min-h-screen transition-all duration-500 ${darkMode ? 'dark' : ''}`}>
       <FloatingElements />
       
-      {/* Enhanced Navigation */}
-      <nav className="fixed top-0 w-full bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg z-50 border-b border-gray-200/20 dark:border-gray-700/20 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <button
-              onClick={() => scrollToSection('hero')}
-              className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
-            >
-              Naveed Alam
-            </button>
-            
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex space-x-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.label}
-                  onClick={() => scrollToSection(item.href)}
-                  className="relative px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 rounded-lg hover:bg-gray-100/50 dark:hover:bg-gray-800/50 group"
-                >
-                  {item.label}
-                  <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
-                </button>
-              ))}
-            </div>
-
-            {/* Controls */}
-            <div className="flex items-center space-x-3">
-              <button
-                onClick={toggleDarkMode}
-                className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
-                aria-label="Toggle dark mode"
-              >
-                {darkMode ? <Sun size={18} /> : <Moon size={18} />}
-              </button>
-              
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
-                aria-label="Toggle mobile menu"
-              >
-                {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        <div className={`md:hidden transition-all duration-300 ease-in-out ${
-          mobileMenuOpen 
-            ? 'max-h-96 opacity-100' 
-            : 'max-h-0 opacity-0 overflow-hidden'
-        }`}>
-          <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border-t border-gray-200/20 dark:border-gray-700/20">
-            <div className="px-4 py-4 space-y-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.label}
-                  onClick={() => scrollToSection(item.href)}
-                  className="block w-full text-left px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all duration-300"
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </nav>
+      {/* Enhanced Header */}
+      <Header 
+        darkMode={darkMode}
+        onToggleDarkMode={toggleDarkMode}
+        onScrollToSection={scrollToSection}
+      />
 
       {/* Enhanced Hero Section */}
       <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
