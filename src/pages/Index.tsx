@@ -508,6 +508,9 @@ const Index = () => {
             </p>
             <div className="flex justify-center space-x-6">
               {[{
+              name: 'Email',
+              href: 'mailto:contact@naveedalam.pro'
+            }, {
               name: 'Facebook',
               href: 'https://www.facebook.com/naveed.alam92114/'
             }, {
