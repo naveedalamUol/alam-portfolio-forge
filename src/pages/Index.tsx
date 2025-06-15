@@ -11,6 +11,7 @@ import FloatingElements from '@/components/FloatingElements';
 import SkillCard from '@/components/SkillCard';
 import ProjectCard from '@/components/ProjectCard';
 import Header from '@/components/Header';
+
 const Index = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -95,7 +96,7 @@ const Index = () => {
   }];
   const skillCategories = [{
     title: 'Technical Skills',
-    skills: ['React', 'Firebase', 'Android Studio', 'IT Support', 'Troubleshooting', 'Python', 'Java'],
+    skills: ['React', 'Firebase', 'Android Studio', 'IT Support', 'Troubleshooting', 'Python', 'Java', 'Node.js'],
     icon: <Code className="w-6 h-6 text-white" />,
     gradient: 'from-blue-500 to-cyan-500'
   }, {
