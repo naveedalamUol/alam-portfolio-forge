@@ -124,6 +124,13 @@ const Index = () => {
     tags: ['React', 'AI/ML', 'Cloud', 'TypeScript'],
     liveUrl: '#',
     githubUrl: '#'
+  }, {
+    title: 'Pharmacy POS System',
+    description: 'Complete point-of-sale system for pharmacy management with inventory tracking, sales analytics, and customer management.',
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=300&fit=crop',
+    tags: ['React', 'TypeScript', 'Dashboard', 'POS'],
+    liveUrl: '/pharmacy-pos',
+    githubUrl: '#'
   }];
   const stats = [{
     number: '50+',
