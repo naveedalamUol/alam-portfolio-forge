@@ -299,6 +299,24 @@ const Index = () => {
                 <CardContent className="p-0">
                   <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
                     <div>
+                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Founder and Developer</h3>
+                      <p className="text-blue-600 dark:text-blue-400">BugSolution</p>
+                    </div>
+                    <div className="text-gray-500 dark:text-gray-400 mt-2 md:mt-0">2023 - Present</div>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Founded and developed BugSolution, a comprehensive platform for bug tracking and software development solutions. 
+                    Leading the technical vision and implementation of innovative debugging tools and development workflows.
+                  </p>
+                </CardContent>
+              </Card>
+            </AnimatedSection>
+
+            <AnimatedSection animation="fade-up" delay={400}>
+              <Card className="p-8 bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
+                <CardContent className="p-0">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                    <div>
                       <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Freelance Developer & Designer</h3>
                       <p className="text-blue-600 dark:text-blue-400">Fiverr Platform</p>
                     </div>
@@ -313,7 +331,7 @@ const Index = () => {
               </Card>
             </AnimatedSection>
 
-            <AnimatedSection animation="fade-up" delay={400}>
+            <AnimatedSection animation="fade-up" delay={600}>
               <Card className="p-8 bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
                 <CardContent className="p-0">
                   <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
