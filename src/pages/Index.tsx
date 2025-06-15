@@ -398,6 +398,22 @@ const Index = () => {
             {projects.map((project, index) => <AnimatedSection key={project.title} animation="fade-up" delay={index * 200}>
                 <ProjectCard {...project} />
               </AnimatedSection>)}
+            
+            <AnimatedSection animation="fade-up" delay={600}>
+              <div className="p-8 bg-white dark:bg-gray-700 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border-2 border-dashed border-gray-300 dark:border-gray-600 flex items-center justify-center min-h-[300px]">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-gray-200 dark:bg-gray-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Code className="w-8 h-8 text-gray-500 dark:text-gray-400" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                    New Project Coming Soon
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    Stay tuned for more exciting projects and innovations.
+                  </p>
+                </div>
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
