@@ -175,13 +175,13 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 pt-16">
-          <AnimatedSection animation="fade-up">
+          <AnimatedSection animation="zoom-fade">
             <div className="relative mb-12">
               <img alt="Naveed Alam" className="w-32 h-32 rounded-full mx-auto shadow-xl ring-4 ring-white dark:ring-gray-800 object-cover" src="/lovable-uploads/18eb7fc7-d117-4a2f-ac6d-396fbd8c5e76.jpg" />
             </div>
           </AnimatedSection>
           
-          <AnimatedSection animation="fade-up" delay={200}>
+          <AnimatedSection animation="slide-up" delay={200}>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
               I'm <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Naveed Alam</span>
             </h1>
@@ -200,7 +200,7 @@ const Index = () => {
             </p>
           </AnimatedSection>
           
-          <AnimatedSection animation="fade-up" delay={800}>
+          <AnimatedSection animation="bounce-in" delay={800}>
             <div className="flex flex-wrap justify-center gap-4">
               <Button size="lg" onClick={handleDownloadCV} className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 shadow-lg hover:shadow-xl transition-all duration-300">
                 <Download className="mr-2" size={18} />
@@ -278,7 +278,7 @@ const Index = () => {
               </div>
             </AnimatedSection>
             
-            <AnimatedSection animation="fade-left">
+            <AnimatedSection animation="zoom-fade">
               <div className="relative">
                 <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop" alt="Coding workspace" className="rounded-lg shadow-lg" />
               </div>
@@ -287,10 +287,10 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Enhanced Skills Section with Lift-Right Motion */}
+      {/* Enhanced Skills Section with Advanced Scroll-Linked Animations */}
       <section id="skills" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection animation="fade-up">
+          <AnimatedSection animation="slide-up">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
                 Skills & Expertise
@@ -300,7 +300,7 @@ const Index = () => {
           </AnimatedSection>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {skillCategories.map((category, index) => <AnimatedSection key={category.title} animation="lift-right" delay={index * 300}>
+            {skillCategories.map((category, index) => <AnimatedSection key={category.title} animation="rotate-in" delay={index * 200}>
                 <SkillCard {...category} />
               </AnimatedSection>)}
           </div>
@@ -400,7 +400,7 @@ const Index = () => {
       {/* Enhanced Projects Section */}
       <section id="projects" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection animation="fade-up">
+          <AnimatedSection animation="bounce-in">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
                 Featured Projects
@@ -410,7 +410,7 @@ const Index = () => {
           </AnimatedSection>
           
           <div className="grid md:grid-cols-2 gap-8">
-            {projects.map((project, index) => <AnimatedSection key={project.title} animation="fade-up" delay={index * 200}>
+            {projects.map((project, index) => <AnimatedSection key={project.title} animation="zoom-fade" delay={index * 200}>
                 <ProjectCard {...project} />
               </AnimatedSection>)}
           </div>
