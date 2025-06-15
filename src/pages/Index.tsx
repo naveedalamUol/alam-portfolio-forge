@@ -292,8 +292,10 @@ const Index = () => {
           </AnimatedSection>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {skillCategories.map((category, index) => <AnimatedSection key={category.title} animation="fade-up" delay={index * 200}>
-                <SkillCard {...category} />
+            {skillCategories.map((category, index) => <AnimatedSection key={category.title} animation="fade-up" delay={index * 300}>
+                <div className="transform transition-all duration-500 hover:scale-105 hover:-translate-y-2">
+                  <SkillCard {...category} />
+                </div>
               </AnimatedSection>)}
           </div>
         </div>

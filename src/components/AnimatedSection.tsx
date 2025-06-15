@@ -24,7 +24,7 @@ const AnimatedSection = ({
           setTimeout(() => setIsVisible(true), delay);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     );
 
     if (ref.current) {
@@ -35,22 +35,22 @@ const AnimatedSection = ({
   }, [delay]);
 
   const getAnimationClass = () => {
-    const baseClass = 'transition-all duration-1000 ease-out';
+    const baseClass = 'transition-all duration-1000 ease-out will-change-transform';
     
     if (!isVisible) {
       switch (animation) {
         case 'fade-up':
-          return `${baseClass} opacity-0 translate-y-12`;
+          return `${baseClass} opacity-0 translate-y-16 scale-95`;
         case 'fade-left':
-          return `${baseClass} opacity-0 -translate-x-12`;
+          return `${baseClass} opacity-0 -translate-x-16 scale-95`;
         case 'fade-right':
-          return `${baseClass} opacity-0 translate-x-12`;
+          return `${baseClass} opacity-0 translate-x-16 scale-95`;
         case 'scale-up':
-          return `${baseClass} opacity-0 scale-95`;
+          return `${baseClass} opacity-0 scale-90`;
         case 'fade-in':
           return `${baseClass} opacity-0`;
         default:
-          return `${baseClass} opacity-0 translate-y-12`;
+          return `${baseClass} opacity-0 translate-y-16 scale-95`;
       }
     }
     
