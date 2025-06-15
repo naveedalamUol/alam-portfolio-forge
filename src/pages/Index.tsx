@@ -75,6 +75,14 @@ const Index = () => {
       description: "Thank you for your message. I'll get back to you soon."
     });
   };
+  const handleDownloadCV = () => {
+    const link = document.createElement('a');
+    link.href = '/lovable-uploads/NAVEED-CV.pdf';
+    link.download = 'Naveed-Alam-CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   const navItems = [{
     label: 'Home',
     href: 'hero'
@@ -194,7 +202,7 @@ const Index = () => {
           
           <AnimatedSection animation="fade-up" delay={800}>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 shadow-lg hover:shadow-xl transition-all duration-300">
+              <Button size="lg" onClick={handleDownloadCV} className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 shadow-lg hover:shadow-xl transition-all duration-300">
                 <Download className="mr-2" size={18} />
                 Download CV
               </Button>
