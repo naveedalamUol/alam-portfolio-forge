@@ -374,15 +374,15 @@ const Index = () => {
               <div className="space-y-8">
                 <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Contact Information</h3>
                 <div className="space-y-6">
-                  <div className="flex items-center space-x-4 p-6 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
-                    <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+                  <a href="mailto:contact@naveedalam.pro" className="flex items-center space-x-4 p-6 bg-white dark:bg-gray-700 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer group">
+                    <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <Mail className="text-white" size={20} />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-900 dark:text-white">Email</h4>
-                      <p className="text-gray-600 dark:text-gray-300">contact@naveedalam.pro</p>
+                      <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">Email</h4>
+                      <p className="text-gray-600 dark:text-gray-300 group-hover:text-blue-500 dark:group-hover:text-blue-300 transition-colors duration-300">contact@naveedalam.pro</p>
                     </div>
-                  </div>
+                  </a>
                   
                   <div className="flex items-center space-x-4 p-6 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
                     <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center">
