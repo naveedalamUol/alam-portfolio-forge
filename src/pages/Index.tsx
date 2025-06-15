@@ -228,14 +228,18 @@ const Index = () => {
             <AnimatedSection animation="fade-right">
               <div className="space-y-6">
                 <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                  I'm a passionate Software Engineer with expertise in mobile app development, 
-                  web technologies, and creative design. My journey blends technical proficiency 
-                  with aesthetic sensibility to craft digital solutions that are both functional and visually engaging.
+                  I'm the Founder of BugSolution and a passionate Software Engineer with a strong background in mobile app development, 
+                  web technologies, and creative design. My work is driven by a commitment to build digital solutions that are not only 
+                  technically sound but also visually compelling.
                 </p>
                 <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Having completed my BS in Software Engineering from the University of Lahore, 
-                  I've built a diverse skill set ranging from React development to 
-                  graphic design and IT support services.
+                  With a BS in Software Engineering from the University of Lahore, I've cultivated a diverse and practical skill set that spans 
+                  React development, graphic design, and IT support services. I take pride in blending technical proficiency with aesthetic 
+                  sensibility to deliver user-focused, modern, and scalable digital experiences.
+                </p>
+                <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                  At BugSolution, I lead innovative tech initiatives, develop custom solutions for clients, and ensure that every product 
+                  meets the highest standards of quality, performance, and design.
                 </p>
                 <div className="grid sm:grid-cols-2 gap-6 pt-6">
                   <div className="p-6 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
