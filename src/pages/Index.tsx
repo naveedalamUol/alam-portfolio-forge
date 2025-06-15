@@ -127,7 +127,7 @@ const Index = () => {
   }, {
     title: 'Pharmacy POS System',
     description: 'Complete point-of-sale system for pharmacy management with inventory tracking, sales analytics, and customer management.',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=300&fit=crop',
+    image: '/lovable-uploads/18eb7fc7-d117-4a2f-ac6d-396fbd8c5e76.jpg',
     tags: ['React', 'TypeScript', 'Dashboard', 'POS'],
     liveUrl: '/pharmacy-pos',
     githubUrl: '#'
