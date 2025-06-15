@@ -10,7 +10,6 @@ import AnimatedSection from '@/components/AnimatedSection';
 import FloatingElements from '@/components/FloatingElements';
 import SkillCard from '@/components/SkillCard';
 import ProjectCard from '@/components/ProjectCard';
-import FeaturedProject from '@/components/FeaturedProject';
 import Header from '@/components/Header';
 
 const Index = () => {
@@ -19,8 +18,9 @@ const Index = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   useEffect(() => {
     setMounted(true);
     const handleScroll = () => {
@@ -40,7 +40,6 @@ const Index = () => {
       document.documentElement.classList.add('dark');
     }
   }, []);
-
   const toggleDarkMode = () => {
     const newDarkMode = !darkMode;
     setDarkMode(newDarkMode);
@@ -51,7 +50,6 @@ const Index = () => {
     }
     localStorage.setItem('darkMode', JSON.stringify(newDarkMode));
   };
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -64,14 +62,12 @@ const Index = () => {
     }
     setMobileMenuOpen(false);
   };
-
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
   };
-
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast({
@@ -79,105 +75,81 @@ const Index = () => {
       description: "Thank you for your message. I'll get back to you soon."
     });
   };
-
-  const navItems = [
-    { label: 'Home', href: 'hero' },
-    { label: 'About', href: 'about' },
-    { label: 'Skills', href: 'skills' },
-    { label: 'Experience', href: 'experience' },
-    { label: 'Projects', href: 'projects' },
-    { label: 'Contact', href: 'contact' }
-  ];
-
-  const skillCategories = [
-    {
-      title: 'Technical Skills',
-      skills: ['React', 'Firebase', 'Android Studio', 'IT Support', 'Troubleshooting', 'Python', 'Java', 'Node.js'],
-      icon: <Code className="w-6 h-6 text-white" />,
-      gradient: 'from-blue-500 to-cyan-500'
-    },
-    {
-      title: 'Design Skills',
-      skills: ['Adobe Photoshop', 'Adobe Illustrator', 'UI/UX Design', 'Logo Design'],
-      icon: <Palette className="w-6 h-6 text-white" />,
-      gradient: 'from-purple-500 to-pink-500'
-    },
-    {
-      title: 'Other Skills',
-      skills: ['SEO', 'Social Media Marketing', 'Cloud Computing', 'Cybersecurity', 'Data Science'],
-      icon: <Settings className="w-6 h-6 text-white" />,
-      gradient: 'from-green-500 to-teal-500'
-    }
-  ];
-
-  const featuredProject = {
-    title: 'BugSolution Platform',
-    description: 'A comprehensive bug tracking and software development solution platform that I founded and developed. Features advanced debugging tools, project management capabilities, and seamless developer workflows.',
-    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop',
-    tags: ['React', 'TypeScript', 'Node.js', 'MongoDB', 'Real-time'],
+  const navItems = [{
+    label: 'Home',
+    href: 'hero'
+  }, {
+    label: 'About',
+    href: 'about'
+  }, {
+    label: 'Skills',
+    href: 'skills'
+  }, {
+    label: 'Experience',
+    href: 'experience'
+  }, {
+    label: 'Projects',
+    href: 'projects'
+  }, {
+    label: 'Contact',
+    href: 'contact'
+  }];
+  const skillCategories = [{
+    title: 'Technical Skills',
+    skills: ['React', 'Firebase', 'Android Studio', 'IT Support', 'Troubleshooting', 'Python', 'Java', 'Node.js'],
+    icon: <Code className="w-6 h-6 text-white" />,
+    gradient: 'from-blue-500 to-cyan-500'
+  }, {
+    title: 'Design Skills',
+    skills: ['Adobe Photoshop', 'Adobe Illustrator', 'UI/UX Design', 'Logo Design'],
+    icon: <Palette className="w-6 h-6 text-white" />,
+    gradient: 'from-purple-500 to-pink-500'
+  }, {
+    title: 'Other Skills',
+    skills: ['SEO', 'Social Media Marketing', 'Cloud Computing', 'Cybersecurity', 'Data Science'],
+    icon: <Settings className="w-6 h-6 text-white" />,
+    gradient: 'from-green-500 to-teal-500'
+  }];
+  const projects = [{
+    title: 'Tour Explorer App',
+    description: 'A comprehensive mobile application built with Flutter and Firebase for discovering and booking travel experiences with real-time updates.',
+    image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=300&fit=crop',
+    tags: ['Flutter', 'Firebase', 'Android Studio', 'Real-time'],
     liveUrl: '#',
-    githubUrl: '#',
-    highlights: [
-      'Real-time bug tracking and issue management',
-      'Advanced code analysis and debugging tools',
-      'Team collaboration and project management',
-      'Integration with popular development tools',
-      'Comprehensive reporting and analytics'
-    ]
-  };
-
-  const projects = [
-    {
-      title: 'Tour Explorer App',
-      description: 'A comprehensive mobile application built with Flutter and Firebase for discovering and booking travel experiences with real-time updates.',
-      image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=300&fit=crop',
-      tags: ['Flutter', 'Firebase', 'Android Studio', 'Real-time'],
-      liveUrl: '#',
-      githubUrl: '#'
-    },
-    {
-      title: 'AI-Powered Web Solutions',
-      description: 'Modern web applications featuring AI integration, responsive design, and cloud-based architecture for enhanced user experiences.',
-      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=300&fit=crop',
-      tags: ['React', 'AI/ML', 'Cloud', 'TypeScript'],
-      liveUrl: '#',
-      githubUrl: '#'
-    },
-    {
-      title: 'Pharmacy POS System',
-      description: 'Complete point-of-sale system for pharmacy management with inventory tracking, sales analytics, and customer management.',
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=300&fit=crop',
-      tags: ['React', 'TypeScript', 'Dashboard', 'POS'],
-      liveUrl: '/pharmacy-pos',
-      githubUrl: '#'
-    }
-  ];
-
-  const stats = [
-    {
-      number: '50+',
-      label: 'Projects Completed',
-      icon: <Award className="w-8 h-8" />
-    },
-    {
-      number: '25+',
-      label: 'Happy Clients',
-      icon: <Users className="w-8 h-8" />
-    },
-    {
-      number: '3+',
-      label: 'Years Experience',
-      icon: <Clock className="w-8 h-8" />
-    }
-  ];
-
+    githubUrl: '#'
+  }, {
+    title: 'AI-Powered Web Solutions',
+    description: 'Modern web applications featuring AI integration, responsive design, and cloud-based architecture for enhanced user experiences.',
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=300&fit=crop',
+    tags: ['React', 'AI/ML', 'Cloud', 'TypeScript'],
+    liveUrl: '#',
+    githubUrl: '#'
+  }, {
+    title: 'Pharmacy POS System',
+    description: 'Complete point-of-sale system for pharmacy management with inventory tracking, sales analytics, and customer management.',
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=300&fit=crop',
+    tags: ['React', 'TypeScript', 'Dashboard', 'POS'],
+    liveUrl: '/pharmacy-pos',
+    githubUrl: '#'
+  }];
+  const stats = [{
+    number: '50+',
+    label: 'Projects Completed',
+    icon: <Award className="w-8 h-8" />
+  }, {
+    number: '25+',
+    label: 'Happy Clients',
+    icon: <Users className="w-8 h-8" />
+  }, {
+    number: '3+',
+    label: 'Years Experience',
+    icon: <Clock className="w-8 h-8" />
+  }];
   if (!mounted) return null;
   if (isLoading) {
     return <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />;
   }
-
-  return (
-    <div className={`min-h-screen transition-all duration-500 ${darkMode ? 'dark' : ''}`}>
+  return <div className={`min-h-screen transition-all duration-500 ${darkMode ? 'dark' : ''}`}>
       <FloatingElements />
       
       {/* Enhanced Header */}
@@ -235,15 +207,13 @@ const Index = () => {
           {/* Stats Section */}
           <AnimatedSection animation="fade-up" delay={1000}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
-              {stats.map((stat, index) => (
-                <div key={stat.label} className="text-center">
+              {stats.map((stat, index) => <div key={stat.label} className="text-center">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full text-white mb-4">
                     {stat.icon}
                   </div>
                   <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{stat.number}</div>
                   <div className="text-gray-600 dark:text-gray-400">{stat.label}</div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </AnimatedSection>
         </div>
@@ -315,11 +285,9 @@ const Index = () => {
           </AnimatedSection>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {skillCategories.map((category, index) => (
-              <AnimatedSection key={category.title} animation="fade-up" delay={index * 200}>
+            {skillCategories.map((category, index) => <AnimatedSection key={category.title} animation="fade-up" delay={index * 200}>
                 <SkillCard {...category} />
-              </AnimatedSection>
-            ))}
+              </AnimatedSection>)}
           </div>
         </div>
       </section>
@@ -414,33 +382,22 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Project Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection animation="fade-up">
-            <FeaturedProject {...featuredProject} />
-          </AnimatedSection>
-        </div>
-      </section>
-
       {/* Enhanced Projects Section */}
-      <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-800">
+      <section id="projects" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection animation="fade-up">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                Other Projects
+                Featured Projects
               </h2>
               <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
             </div>
           </AnimatedSection>
           
           <div className="grid md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
-              <AnimatedSection key={project.title} animation="fade-up" delay={index * 200}>
+            {projects.map((project, index) => <AnimatedSection key={project.title} animation="fade-up" delay={index * 200}>
                 <ProjectCard {...project} />
-              </AnimatedSection>
-            ))}
+              </AnimatedSection>)}
           </div>
         </div>
       </section>
@@ -543,39 +500,30 @@ const Index = () => {
               © 2025 Naveed Alam. All rights reserved.
             </p>
             <div className="flex justify-center space-x-6">
-              {[
-                { name: 'Facebook', href: '#' },
-                { name: 'Instagram', href: '#' },
-                { name: 'Fiverr', href: 'https://fiverr.com/g_designer6' },
-                { name: 'LinkedIn', href: 'https://www.linkedin.com/in/naveed-alam9/' }
-              ].map(social => (
-                <a 
-                  key={social.name} 
-                  href={social.href} 
-                  target={social.href.startsWith('http') ? '_blank' : undefined} 
-                  rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined} 
-                  className="text-gray-400 hover:text-white transition-colors duration-300"
-                >
+              {[{
+              name: 'Facebook',
+              href: '#'
+            }, {
+              name: 'Instagram',
+              href: '#'
+            }, {
+              name: 'Fiverr',
+              href: 'https://fiverr.com/g_designer6'
+            }, {
+              name: 'LinkedIn',
+              href: 'https://www.linkedin.com/in/naveed-alam9/'
+            }].map(social => <a key={social.name} href={social.href} target={social.href.startsWith('http') ? '_blank' : undefined} rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined} className="text-gray-400 hover:text-white transition-colors duration-300">
                   {social.name}
-                </a>
-              ))}
+                </a>)}
             </div>
           </div>
         </div>
       </footer>
 
       {/* Back to Top Button */}
-      {showBackToTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 z-40"
-          aria-label="Back to top"
-        >
+      {showBackToTop && <button onClick={scrollToTop} className="fixed bottom-8 right-8 w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 z-40" aria-label="Back to top">
           <ArrowUp size={20} />
-        </button>
-      )}
-    </div>
-  );
+        </button>}
+    </div>;
 };
-
 export default Index;
