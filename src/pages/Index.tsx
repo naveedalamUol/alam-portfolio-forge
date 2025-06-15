@@ -11,7 +11,6 @@ import FloatingElements from '@/components/FloatingElements';
 import SkillCard from '@/components/SkillCard';
 import ProjectCard from '@/components/ProjectCard';
 import Header from '@/components/Header';
-
 const Index = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -155,7 +154,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 pt-16">
           <AnimatedSection animation="fade-up">
             <div className="relative mb-12">
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face" alt="Naveed Alam" className="w-32 h-32 rounded-full mx-auto shadow-xl ring-4 ring-white dark:ring-gray-800 object-cover" />
+              <img alt="Naveed Alam" className="w-32 h-32 rounded-full mx-auto shadow-xl ring-4 ring-white dark:ring-gray-800 object-cover" src="/lovable-uploads/18eb7fc7-d117-4a2f-ac6d-396fbd8c5e76.jpg" />
             </div>
           </AnimatedSection>
           
