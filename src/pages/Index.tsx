@@ -189,9 +189,9 @@ const Index = () => {
                 Contact Me
               </Button>
               <Button size="lg" variant="outline" asChild className="border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-400 px-8 py-3 transition-all duration-300">
-                <a href="https://fiverr.com/g_designer6" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/in/naveed-alam9/" target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="mr-2" size={18} />
-                  Fiverr Profile
+                  LinkedIn Profile
                 </a>
               </Button>
             </div>
