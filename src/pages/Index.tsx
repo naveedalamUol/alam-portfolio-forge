@@ -328,7 +328,7 @@ const Index = () => {
                       <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Founder and Developer</h3>
                       <p className="text-blue-600 dark:text-blue-400">BugSolution</p>
                     </div>
-                    <div className="text-gray-500 dark:text-gray-400 mt-2 md:mt-0">2023 - Present</div>
+                    <div className="text-gray-500 dark:text-gray-400 mt-2 md:mt-0">2024 - Present</div>
                   </div>
                   <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                     Founded and developed BugSolution, a comprehensive platform for bug tracking and software development solutions. 
