@@ -11,7 +11,7 @@ interface SkillCardProps {
 
 const SkillCard = ({ title, skills, icon, gradient }: SkillCardProps) => {
   return (
-    <Card className="group relative overflow-hidden bg-white dark:bg-gray-700 hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] border border-gray-200 dark:border-gray-600">
+    <Card className="group relative overflow-hidden bg-white dark:bg-gray-700 hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 hover:translate-x-2 border border-gray-200 dark:border-gray-600">
       <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
       
       <CardContent className="p-8 relative z-10">
