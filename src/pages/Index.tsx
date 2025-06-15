@@ -317,6 +317,25 @@ const Index = () => {
                 <CardContent className="p-0">
                   <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
                     <div>
+                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white">IT Supporting Engineer</h3>
+                      <p className="text-blue-600 dark:text-blue-400">Bajaur Medical Complex</p>
+                    </div>
+                    <div className="text-gray-500 dark:text-gray-400 mt-2 md:mt-0">2022 - 2023</div>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Provided comprehensive IT support services including system maintenance, troubleshooting, 
+                    and technical assistance to medical staff. Managed network infrastructure and ensured 
+                    seamless operation of critical medical information systems.
+                  </p>
+                </CardContent>
+              </Card>
+            </AnimatedSection>
+
+            <AnimatedSection animation="fade-up" delay={600}>
+              <Card className="p-8 bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
+                <CardContent className="p-0">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                    <div>
                       <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Freelance Developer & Designer</h3>
                       <p className="text-blue-600 dark:text-blue-400">Fiverr Platform</p>
                     </div>
@@ -331,7 +350,7 @@ const Index = () => {
               </Card>
             </AnimatedSection>
 
-            <AnimatedSection animation="fade-up" delay={600}>
+            <AnimatedSection animation="fade-up" delay={800}>
               <Card className="p-8 bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
                 <CardContent className="p-0">
                   <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
