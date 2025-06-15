@@ -509,7 +509,7 @@ const Index = () => {
             <div className="flex justify-center space-x-6">
               {[{
               name: 'Facebook',
-              href: '#'
+              href: 'https://www.facebook.com/naveed.alam92114/'
             }, {
               name: 'Instagram',
               href: '#'
