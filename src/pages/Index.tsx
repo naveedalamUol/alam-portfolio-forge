@@ -11,6 +11,7 @@ import FloatingElements from '@/components/FloatingElements';
 import SkillCard from '@/components/SkillCard';
 import ProjectCard from '@/components/ProjectCard';
 import Header from '@/components/Header';
+import { generateCV } from '@/utils/cvGenerator';
 
 const Index = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -76,12 +77,7 @@ const Index = () => {
     });
   };
   const handleDownloadCV = () => {
-    const link = document.createElement('a');
-    link.href = '/lovable-uploads/NAVEED-CV.pdf';
-    link.download = 'Naveed-Alam-CV.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    generateCV();
   };
   const navItems = [{
     label: 'Home',
